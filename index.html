@@ -94,6 +94,13 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
 .ad span:nth-child(2){animation-delay:.2s;}
 .ad span:nth-child(3){animation-delay:.4s;}
 @keyframes ap{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.nbox{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.28);border-radius:6px;padding:16px 20px;margin-top:22px;max-width:420px;}
+.nbox label{display:block;color:rgba(255,255,255,.85);font-size:8.5pt;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+.nbox input{width:100%;background:rgba(255,255,255,.95);border:none;border-radius:4px;padding:9px 13px;font-family:var(--f);font-size:11pt;font-weight:600;color:var(--c6gr);outline:none;}
+.nbox input:focus{box-shadow:0 0 0 2px var(--c6g);}
+.nbox input::placeholder{color:#aaa;font-weight:400;}
+.btncert{background:var(--c6g);color:#fff;border:none;padding:9px 22px;border-radius:4px;font-family:var(--f);font-size:10pt;font-weight:700;cursor:pointer;transition:background .15s;margin-top:4px;}
+.btncert:hover{background:#5a9932;}
 </style>
 </head>
 <body>
@@ -111,9 +118,13 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
   <div class="csub">Modules 1–5 &nbsp;·&nbsp; Project Setup Through Table QA/QC &nbsp;·&nbsp; Core6 Internal</div>
   <div class="cpills">
     <div class="cpill"><strong>Audience</strong>All staff using ESdat</div>
-    <div class="cpill"><strong>Modules</strong>6 learning modules</div>
+    <div class="cpill"><strong>Modules</strong>7 learning modules</div>
     <div class="cpill"><strong>Assessment</strong>13-question test (75% to pass)</div>
     <div class="cpill"><strong>Format</strong>Self-directed online</div>
+  </div>
+  <div class="nbox">
+    <label for="trainee-name">Your full name</label>
+    <input type="text" id="trainee-name" placeholder="Enter your name before starting" autocomplete="name">
   </div>
 </div>
 
@@ -464,25 +475,65 @@ const M=[
 `}
 ];
 
-const Q=[
-{q:"The Project ID to write on a Chain of Custody for project 00712, phase 02 is:",opts:["00712","00712-02","ESdat_CA+Core6@ESdatLabSync.net","The Site Name — the PM will sort out the ID"],correct:1,e:"The Project ID on the COC is the 5-digit project number plus the 2-digit phase: 00712-02. The lab uses this to route the EDD file to the correct Project in ESdat. The Site ID (00712) is used within ESdat but does not appear on the COC in this form."},
-{q:"A lab report arrives in ESdat Lab Uploads with error 'Invalid Project ID'. What is the correct sequence of actions?",opts:["Ask the lab to resubmit with a different Project ID that you create on the spot","Create the missing Project in ESdat or identify the correct one, reassign the lab report to it, then tell the lab the correct ID for all future submissions","Approve the report anyway — the data still loads correctly with an invalid ID","Delete the upload and request a PDF-only COA instead"],correct:1,e:"You must create or identify the correct Project in ESdat and reassign the lab report to it. Then advise the lab so future uploads route correctly. Approving with an invalid ID is not possible; deleting the upload loses the analytical data entirely."},
-{q:"A soil sample was collected at borehole BH-03. The lab reports it as sample BH-03-02. During lab report review in ESdat you should:",opts:["Create a new Location called BH-03-02 and link the sample to it","Link the sample to Location BH-03 — the borehole is the Location, not the individual sample","Leave the location field blank — it is optional for soil samples","Rename the sample ID to BH-03 to match the Location code"],correct:1,e:"The Location is the physical borehole (BH-03). The sample ID (BH-03-02) is the individual sample collected from that borehole. Creating a Location per sample destroys the ability to view all sampling rounds from a single location and prevents correct spatial grouping."},
-{q:"Which BC CSR Schedule 3.1 soil standard components apply to ALL BC sites regardless of land use and must always be included?",opts:["Part 2 Human Health only — Part 1 and Part 3 are land-use specific","Part 3 Environmental Protection only","The TCIP (Toxicity to soil invertebrates and plants) and ICS (Intake of Contaminated Soil) matrix standards in Part 1 — applicable to all sites irrespective of land use","None — all Schedule 3.1 standards require land use confirmation from the PM before applying"],correct:2,e:"The TCIP and ICS matrix standards (Schedule 3.1 Part 1) apply to all BC sites regardless of land use. This is explicitly stated in the Core6 QAQC checklist. Omitting them from any soil table is a QAQC finding."},
-{q:"Which Chem Profile and Group By settings are correct in ESdat Chemistry Table for all Core6 projects?",opts:["Default profile, Group by Chem Group","Core6 2026 New Chemistry Grouping, Group by Method Type","Core6 2026 New Chemistry Grouping, Group by Chem Group","Default profile, Group by Method Type"],correct:2,e:"The correct settings are Core6 2026 New Chemistry Grouping (Chem Profile) and Group by Chem Group (Group By) for all Core6 projects. Using the Default profile produces incorrect analyte groupings and subheadings that do not meet Core6 reporting standards."},
-{q:"You want to produce the Core6 standard transposed-format chemistry table (analytes down rows, samples across columns). What Custom Layout and Export settings do you select?",opts:["Layout: any Core6 Default; Export: Vertical Export","Layout: Core6 2026 - Table - Transposed; Export: Horizontal Export","Layout: Core6 2026 - Table - Transposed; Export: Vertical Export","Layout: any Core6 Default; Export: Horizontal Export"],correct:1,e:"The transposed format requires both settings: the 'Core6 2026 - Table - Transposed' Custom Layout AND Horizontal Export on the Excel Export tab. Using Vertical Export with the transposed layout would still produce an untransposed output. Both settings must match."},
-{q:"After exporting a chemistry table to Excel, no RPD values are calculating despite the formula being entered correctly. The most likely cause is:",opts:["ESdat does not support RPD calculation — these must always be done manually","The duplicate samples were not linked to their parent samples in ESdat before approval","ESdat exports result cells as Text not Numbers — cells must be converted to Number before RPD formulas will calculate","The RPD column is too narrow to display the percentage result"],correct:2,e:"ESdat exports all result values as Text. The RPD formula uses ISNUMBER() — if cells are Text, it returns '-' or errors. After every export, select all result cells, look for the green Excel error marker, and click 'Convert to Number'. This must be done before RPD formulas, conditional formatting, or any calculation will work on the data."},
-{q:"A groundwater table shows dissolved iron and manganese exceedances at a site with no Schedule 2 activities. The correct action is:",opts:["Report the exceedances as-is — dissolved Fe and Mn standards always apply under Schedule 3.2","Remove the Fe and Mn exceedance highlights and add a footnote citing CSR Schedule 3.2 footnotes 32, 33, 35, and 36 stating the standards are not applicable","Replace the iron and manganese standards with Protocol 9 background concentration values","Remove iron and manganese rows from the table entirely"],correct:1,e:"Dissolved iron and manganese Schedule 3.2 standards only apply where specific Schedule 2 activities have occurred at the site. If they do not apply, remove exceedance highlights and add the required footnote. The standards can remain in the table for reference — just without exceedance formatting. Removing the rows entirely is not correct."},
-{q:"During QAQC you notice a soil result for a metal that exceeds the CSR standard but is below the Protocol 4 background concentration for that analyte. The correct action is:",opts:["Report the exceedance — CSR standards are the only applicable threshold","Remove the exceedance highlight — concentrations that do not exceed the Protocol 4 background concentration should not be flagged","Apply Protocol 11 upper cap concentration check to determine the correct threshold","Contact the laboratory to verify the result before any action"],correct:1,e:"Protocol 4 background concentrations represent natural geogenic concentrations. If a concentration exceeds the CSR standard but does not exceed the Protocol 4 background, the elevated result is attributable to natural background — not site contamination. The exceedance highlight should be removed. This comparison and the removal must be done in ESdat before export, not manually in Excel."},
-{q:"A sodium result in a soil table has no CSR standard showing. The lab COA confirms sodium was analyzed. The most likely cause and correct fix is:",opts:["Sodium has no BC CSR soil standard — the blank column is correct","The sodium result falls below the method detection limit and ESdat suppresses standards when results are non-detect","The lab reported sodium with an incorrect CAS number in the EDD file. The correct CAS for CSR comparison is Sodium Ion 17341-25-2 (saturated paste method). Contact the lab to reissue the EDD with the correct CAS number.","Switch to the Default Chem Profile — the Core6 2026 profile does not display sodium standards"],correct:2,e:"ESdat matches standards to analytes by CAS number. Sodium must be analyzed via saturated paste method and reported under CAS 17341-25-2 (Sodium Ion) for CSR soil standards to appear. The same applies to chloride (CAS 16887-00-06). If the lab uses a general CAS for NaCl, ESdat cannot match to the standard. The fix is to have the lab reissue the EDD with the correct CAS number."}
-,{q:"On a provincial BC contaminated site with PAH contamination, what is the primary legally binding standard that must be applied, and what is the role of CCME guidelines?",opts:["CCME guidelines are the primary standard; BC CSR is secondary","BC CSR Schedule 3.1 is the primary legally binding standard; CCME guidelines are applied alongside as supplementary screening and are required where the CSR lacks an equivalent standard","CCME and BC CSR apply equally — whichever is more conservative governs","CCME guidelines only apply on federal Crown land and are not relevant to provincial BC sites"],correct:1,e:"The BC CSR is the legally binding standard under BC's Environmental Management Act for provincial contaminated sites. CCME Canadian Environmental Quality Guidelines are national guidelines — not legally binding in BC — but are widely applied in practice alongside the CSR, are required on federal contaminated sites, and cover some analytes where the CSR has no equivalent standard."},
-{q:"At a PHC-impacted site where both F1/F2 petroleum hydrocarbon fractions AND polycyclic aromatic hydrocarbons (PAHs) are present, which of the following correctly describes the required assessment approach?",opts:["Apply only the PHC CWS — it covers all hydrocarbon-related carcinogenicity","Apply only the CCME 2010 PAH three-step assessment — it covers all PHC compounds","Apply both the PHC CWS and the CCME 2010 PAH three-step assessment independently — the PHC CWS does not address carcinogenicity and cannot substitute for the PAH cancer risk step","Apply only the BC CSR — CCME guidelines are not needed when BC CSR standards are present"],correct:2,e:"The PHC Canada-Wide Standards cover the F1–F4 petroleum fractions but do not address carcinogenicity. At sites with both PHC and PAH contamination, both the PHC CWS and the full CCME 2010 PAH three-step assessment (B[a]P TPE, IACR, and ecological SQGE) must be applied in parallel. Omitting either assessment when both analyte groups are present is a QAQC finding."},
-{q:"You are configuring a Chemistry Table for a Commercial land use site with PAH contamination. For the CCME 2010 PAH IACR (Step 2) standard, the site has fine-textured loamy soil. Which ESdat standard variant should you select?",opts:["SQGPW for Carcinogenic and Other PAHs - Com IACR (base version, no texture specified)","SQGPW for Carcinogenic and Other PAHs - Com IACR_Fine_Soil","SQGPW for Carcinogenic and Other PAHs - Com IACR_Coarse_Soil","Soil texture does not matter for the IACR calculation — use the base version always"],correct:1,e:"The IACR standard has three ESdat variants: base IACR, IACR_Fine_Soil, and IACR_Coarse_Soil. Fine-textured soils (loam, clay, silt) have different leaching characteristics than coarse soils (sand, gravel), so the applicable standard values differ. You must confirm soil texture from field logs and lab data before selecting. Applying the wrong texture variant is a substantive QAQC error."}
-
+// ── FULL QUESTION POOL (28 questions) ──
+// Each test: 13 drawn at random, question order shuffled, answer options shuffled
+const POOL=[
+// ── PROJECT SETUP ──
+{q:"The Project ID to write on a Chain of Custody for project 00712, phase 02 is:",opts:["00712","00712-02","ESdat_CA+Core6@ESdatLabSync.net","The Site Name — the PM will sort out the ID"],correct:1,e:"The Project ID on the COC is the 5-digit project number plus the 2-digit phase: 00712-02. The lab uses this to route the EDD file to the correct Project in ESdat. The Site ID (00712) is used within ESdat but does not appear on the COC in this form."}
+,{q:"A lab report arrives in ESdat Lab Uploads with error 'Invalid Project ID'. What is the correct sequence of actions?",opts:["Ask the lab to resubmit with a different Project ID that you create on the spot","Create the missing Project in ESdat or identify the correct one, reassign the lab report to it, then tell the lab the correct ID for all future submissions","Approve the report anyway — the data still loads correctly with an invalid ID","Delete the upload and request a PDF-only COA instead"],correct:1,e:"You must create or identify the correct Project in ESdat and reassign the lab report to it. Then advise the lab so future uploads route correctly. Approving with an invalid ID is not possible; deleting the upload loses the analytical data entirely."}
+,{q:"You create a new ESdat project but lab uploads from ALS are not appearing. The project is Active and the Project ID is correct on the COC. What should you check next?",opts:["Whether the lab sent the EDD to the correct LabSync address: ESdat_CA+Core6@ESdatLabSync.net","Whether the project has at least one Location imported","Whether the Chem Profile is set to Core6 2026","Whether Protocol 4 background concentrations have been loaded"],correct:0,e:"If the Project ID is confirmed correct and the project is Active, the next most likely cause is that the lab sent the EDD to the wrong email address. The Core6 LabSync address is ESdat_CA+Core6@ESdatLabSync.net. Check Lab → Lab Uploads for any error records, and confirm with the lab which address they used."}
+,{q:"Why is it important to set the coordinate system at Site creation rather than later?",opts:["It only affects how maps look — it can be changed at any time without consequence","ESdat locks the coordinate system permanently after any single Location is created","The coordinate system is very difficult to change once Locations and data exist against the Site, and importing in the wrong system places all locations in incorrect positions","The coordinate system is only relevant for groundwater samples — it doesn't affect soil data"],correct:2,e:"The coordinate system is set at Site creation and is very difficult to change once data exists. Importing Locations in the wrong system (e.g. WGS84 lat/long instead of NAD83 UTM Zone 10N) places all monitoring points in incorrect positions. GPS units commonly record in WGS84 — always convert to UTM Zone 10N before importing for BC/Metro Vancouver projects."}
+// ── LOCATIONS ──
+,{q:"A soil sample was collected at borehole BH-03. The lab reports it as sample BH-03-02. During lab report review in ESdat you should:",opts:["Create a new Location called BH-03-02 and link the sample to it","Link the sample to Location BH-03 — the borehole is the Location, not the individual sample","Leave the location field blank — it is optional for soil samples","Rename the sample ID to BH-03 to match the Location code"],correct:1,e:"The Location is the physical borehole (BH-03). The sample ID (BH-03-02) is the individual sample collected from that borehole. Creating a Location per sample destroys the ability to view all sampling rounds from a single location and prevents correct spatial grouping."}
+,{q:"You import Locations before a field program but after the lab report arrives, many samples show as unassigned. What is the most likely cause?",opts:["Locations must be re-imported after each lab report is received","The lab's sample Field IDs don't match the ESdat Location Code format, so auto-assignment failed — use the Assign tool to link samples manually","Unassigned samples are normal and do not affect chemistry table output","ESdat only auto-assigns samples to Locations when using the Field App"],correct:1,e:"ESdat auto-assigns samples to Locations by reading the Field ID using '/' or '_' separators to extract the Location Code. If the lab's sample naming convention doesn't match your ESdat Location Codes (e.g. 'BH-25-01' vs 'BH25-01'), auto-assignment fails. Use the Assign tool in Lab Report Details to bulk-link the unmatched samples."}
+// ── LAB IMPORT ──
+,{q:"You reject a lab report in ESdat because the lab is reissuing corrected results. A colleague notices the rejected results are still showing in the Chemistry Table. What is the correct explanation?",opts:["This is a bug — rejected results should not appear in any Data View","Rejecting a report only prevents new data being added to it. Existing results remain visible in Chemistry Tables unless filtered out or the report is deleted.","The results will disappear once the new version is approved","Only Admin users can see rejected lab report data"],correct:1,e:"Rejecting a lab report prevents new data being added — it does NOT hide existing results from Data Views including Chemistry Tables. To exclude rejected data, add an explicit filter in the Chemistry Table or delete the report entirely. This is one of the most commonly misunderstood behaviours in ESdat and a frequent source of errors in client tables."}
+,{q:"When completing the lab report review before approval, what two steps are BOTH required to correctly set up a field duplicate sample?",opts:["Change Sample Type to Field_D only — ESdat infers the parent sample automatically from the sample naming convention","Change Sample Type to Field_D, AND use the (...) button in the Parent Sample column to explicitly link it to the original sample — both steps are required for RPD calculations","Enter 'DUPLICATE' in the sample comment field, then change Sample Type to Field_D","Link the sample to its Location as a duplicate type — no further action is needed"],correct:1,e:"Two steps are both required: (1) change Sample Type to Field_D, and (2) use the three dots (...) in the Parent Sample column to explicitly link the duplicate to its parent. Without the parent link, ESdat cannot calculate RPD values regardless of the Sample Type assigned. Linking the type alone is not sufficient."}
+,{q:"After approving a lab report you notice that sample depths were not entered. What must you do to correct this?",opts:["Depths can be added at any time without affecting the approval — edit them directly in the Chemistry Table","You must revoke approval, edit the depths in the Lab Report Details screen, save changes, then re-approve","Delete the lab report and reimport it","Contact the lab to reissue the EDD with depths included"],correct:1,e:"Approved lab reports cannot be edited without first revoking approval. Once approval is revoked, you can edit sample details including depths in the Lab Report Details screen, save changes, and then re-approve. Depths are essential for the Depth column in chemistry tables — tables exported without depths are incomplete for client reporting."}
+// ── DMM ──
+,{q:"During DMM historical chemistry import, you have a non-detect result of &lt;0.5 mg/kg for benzene. How should this be entered in the Excel template?",opts:["Result = '&lt;0.5', Prefix = blank — enter the full text string in the Result field","Result = 0, Prefix = '&lt;' — use zero for all non-detects","Result = 0.5 (numeric only), Prefix = '&lt;' — the Result field is strictly numeric and the symbol goes in the Prefix column","Result = blank, Prefix = 'ND'"],correct:2,e:"The Result field in the DMM template is strictly numeric. For a non-detect of &lt;0.5 mg/kg: enter 0.5 in Result and &lt; in the Prefix column. Entering &lt;0.5 as text in the Result field causes validation failure on every non-detect row. This is the single most common DMM import error."}
+,{q:"What is the correct ESdat ChemCode for the F2 petroleum hydrocarbon fraction (C10–C16 range)?",opts:["F2","PHC F2","C10-C16","TPH F2"],correct:2,e:"The ESdat ChemCode for the F2 fraction is C10-C16 — an ESdat-specific identifier following BC CSR fraction naming. 'F2', 'PHC F2', and 'TPH F2' are common lab naming conventions but are not valid ESdat ChemCodes and will fail DMM validation on every row containing that analyte."}
+,{q:"You are doing a DMM import of historical data in Add/Update mode. Some rows come back with a 'duplicate record' validation error. What does this mean and what should you do?",opts:["The ChemCode is not recognised — use the ChemCode lookup tool to find the correct code","A record with that Sample Code + ChemCode combination already exists in the database. Check whether it was loaded previously. If the existing data is correct, skip those rows. If it needs updating, switch to Update mode.","The date format is wrong — convert all dates to YYYY-MM-DD format","The Site or Project does not exist — create it before importing"],correct:1,e:"A duplicate record error in Add/Update mode means a record with that exact Sample Code + ChemCode combination already exists in the database, usually from a previous import session. In Add/Update mode, ESdat will update the existing record with your new values. If the existing record is already correct, you can skip those rows. If you need to fully replace the values, use Update mode with the corrected data."}
+,{q:"When transposing a historical BC analytical table (cross-tab format) into the DMM template, what is the most important rule about the guideline value columns?",opts:["Import the guideline columns as a separate Environmental Standard — they're more accurate than the ESdat library","Ignore the guideline value columns entirely — extract only the sample data columns. Importing a guideline value as a chemistry result corrupts exceedance comparisons.","Rename the guideline columns to match ESdat standard names before importing","Guidelines must be in every import for ESdat to validate results correctly"],correct:1,e:"Historical analytical tables in BC reports typically have columns for CSR, CCME, and other guideline values alongside the sample results. These guideline columns must be ignored entirely when mapping to the DMM template — only the sample result columns are extracted. Accidentally importing a guideline value as a chemistry result silently corrupts your exceedance comparisons."}
+// ── BC CSR STANDARDS ──
+,{q:"Which BC CSR Schedule 3.1 soil standard components apply to ALL BC sites regardless of land use and must always be included?",opts:["Part 2 Human Health only — Part 1 and Part 3 are land-use specific","Part 3 Environmental Protection only","The TCIP (Toxicity to soil invertebrates and plants) and ICS (Intake of Contaminated Soil) matrix standards in Part 1 — applicable to all sites irrespective of land use","None — all Schedule 3.1 standards require land use confirmation from the PM before applying"],correct:2,e:"The TCIP and ICS matrix standards (Schedule 3.1 Part 1) apply to all BC sites regardless of land use. Omitting them from any soil table is a QAQC finding."}
+,{q:"A groundwater table shows dissolved iron and manganese exceedances at a site with no Schedule 2 activities. The correct action is:",opts:["Report the exceedances as-is — dissolved Fe and Mn standards always apply under Schedule 3.2","Remove the Fe and Mn exceedance highlights and add a footnote citing CSR Schedule 3.2 footnotes 32, 33, 35, and 36 stating the standards are not applicable","Replace the iron and manganese standards with Protocol 9 background concentration values","Remove iron and manganese rows from the table entirely"],correct:1,e:"Dissolved iron and manganese Schedule 3.2 standards only apply where specific Schedule 2 activities have occurred at the site. If they do not apply, remove exceedance highlights and add the required footnote. The standards can remain in the table for reference — just without exceedance formatting."}
+,{q:"During QAQC you notice a soil result for a metal that exceeds the CSR standard but is below the Protocol 4 background concentration for that analyte. The correct action is:",opts:["Report the exceedance — CSR standards are the only applicable threshold","Remove the exceedance highlight — concentrations below the Protocol 4 background should not be flagged as site contamination","Apply Protocol 11 upper cap concentration check to determine the correct threshold","Contact the laboratory to verify the result before any action"],correct:1,e:"Protocol 4 background concentrations represent natural geogenic concentrations in BC soils. If a concentration exceeds the CSR standard but does not exceed the Protocol 4 background, the elevated result is attributable to natural background — not site contamination. The exceedance highlight should be removed. This comparison must be completed in ESdat before export, not manually in Excel."}
+,{q:"Which two groundwater standards apply at ALL BC provincial contaminated sites regardless of land use and must be included in every groundwater table?",opts:["EPHw10-19 and VHw6-10","Schedule 3.2 drinking water standards and Schedule 3.2 aquatic life standards","Protocol 9 background concentrations and Schedule 3.2 irrigation standards","EPHw10-19 and Schedule 3.2 livestock watering standards"],correct:0,e:"EPHw10-19 (Extractable Petroleum Hydrocarbons C10-C19 in groundwater) and VHw6-10 (Volatile Hydrocarbons C6-C10 in groundwater) apply at all BC provincial sites regardless of land use. Their absence in a groundwater table is a QAQC finding."}
+,{q:"A sodium result in a soil table has no CSR standard showing. The lab COA confirms sodium was analyzed. The most likely cause and correct fix is:",opts:["Sodium has no BC CSR soil standard — the blank column is correct","The sodium result falls below the method detection limit and ESdat suppresses standards when results are non-detect","The lab reported sodium with an incorrect CAS number in the EDD file. The correct CAS for CSR comparison is Sodium Ion 17341-25-2 (saturated paste method). Contact the lab to reissue the EDD with the correct CAS number.","Switch to the Default Chem Profile — the Core6 2026 profile does not display sodium standards"],correct:2,e:"ESdat matches standards to analytes by CAS number. Sodium must be analyzed via saturated paste method and reported under CAS 17341-25-2 (Sodium Ion) for CSR soil standards to appear. The same applies to chloride (CAS 16887-00-06). If the lab uses a general CAS for NaCl, ESdat cannot match to the standard. The fix is to have the lab reissue the EDD with the correct CAS number."}
+,{q:"Environmental Standards have been loaded into the ESdat global library but exceedance notifications are not firing when new lab results arrive. What is the most likely reason?",opts:["The standards library needs to be refreshed manually after each new standard is added","Standards must be associated with the Site or Location level — loading them into the global library alone is not sufficient for notifications to trigger","Exceedance notifications only work for field data, not lab reports","Only Admin users receive exceedance notifications regardless of Site permissions"],correct:1,e:"Standards must be associated at the Site (or Location) level for exceedance notifications to fire. Loading them into the global library is not enough — the Site association step connects the standard to incoming data for that specific site. Navigate to Settings → Env Standards and associate the relevant standards to the Site."}
+// ── CCME ──
+,{q:"On a provincial BC contaminated site with PAH contamination, what is the primary legally binding standard that must be applied, and what is the role of CCME guidelines?",opts:["CCME guidelines are the primary standard; BC CSR is secondary","BC CSR Schedule 3.1 is the primary legally binding standard; CCME guidelines are applied alongside as supplementary screening and are required where the CSR lacks an equivalent standard","CCME and BC CSR apply equally — whichever is more conservative governs","CCME guidelines only apply on federal Crown land and are not relevant to provincial BC sites"],correct:1,e:"The BC CSR is the legally binding standard under BC's Environmental Management Act for provincial contaminated sites. CCME Canadian Environmental Quality Guidelines are national guidelines — not legally binding in BC — but are widely applied in practice alongside the CSR, required on federal contaminated sites, and cover some analytes where the CSR has no equivalent standard."}
+,{q:"At a PHC-impacted site where both F1/F2 petroleum hydrocarbon fractions AND polycyclic aromatic hydrocarbons (PAHs) are present, which correctly describes the required assessment approach?",opts:["Apply only the PHC CWS — it covers all hydrocarbon-related carcinogenicity","Apply only the CCME 2010 PAH three-step assessment — it covers all PHC compounds","Apply both the PHC CWS and the CCME 2010 PAH three-step assessment independently — the PHC CWS does not address carcinogenicity and cannot substitute for the PAH cancer risk step","Apply only the BC CSR — CCME guidelines are not needed when BC CSR standards are present"],correct:2,e:"The PHC Canada-Wide Standards cover the F1–F4 petroleum fractions but do not address carcinogenicity. At sites with both PHC and PAH contamination, both the PHC CWS and the full CCME 2010 PAH three-step assessment (B[a]P TPE, IACR, and ecological SQGE) must be applied in parallel. Omitting either assessment when both analyte groups are present is a QAQC finding."}
+,{q:"You are configuring a Chemistry Table for a Commercial land use site with PAH contamination. The site has fine-textured loamy soil. For the CCME 2010 PAH IACR (Step 2) standard, which ESdat standard variant should you select?",opts:["SQGPW for Carcinogenic and Other PAHs - Com IACR (base version, no texture specified)","SQGPW for Carcinogenic and Other PAHs - Com IACR_Fine_Soil","SQGPW for Carcinogenic and Other PAHs - Com IACR_Coarse_Soil","Soil texture does not matter for the IACR calculation — use the base version always"],correct:1,e:"The IACR standard has three ESdat variants: base IACR, IACR_Fine_Soil, and IACR_Coarse_Soil. Fine-textured soils (loam, clay, silt) have different leaching characteristics than coarse soils (sand, gravel), so the applicable standard values differ. You must confirm soil texture from field logs and lab data before selecting. Applying the wrong texture variant is a substantive QAQC error."}
+,{q:"Three PAHs commonly reported by BC labs — Acenaphthene, Acenaphthylene, and Fluorene — are absent from the Step 3 ecological assessment. Why?",opts:["They are carcinogenic and are assessed in Step 1 (B[a]P TPE) instead","They are below detection limit thresholds and are excluded by convention","They are non-carcinogenic PAHs for which CCME 2010 provides no Soil Quality Guideline for Ecology (SQGE). CCME directs users to other jurisdictions for these compounds.","They are covered by the PHC CWS F3 fraction standard"],correct:2,e:"Acenaphthene, Acenaphthylene, and Fluorene are non-carcinogenic PAHs for which CCME 2010 does not provide a Soil Quality Guideline for Ecology. CCME Table 1 notes there is no SQG for environmental health protection for these compounds, and directs users to consult guidelines from other jurisdictions for human health non-carcinogenic effects."}
+,{q:"A PHC-impacted site has F3 fraction (C16–C34) detected near a building with a basement. Should the vapour inhalation pathway standard be included in the PHC CWS assessment?",opts:["Yes — vapour inhalation applies to all four PHC fractions at all depths","Yes — but only if the F3 concentration exceeds the direct contact standard","No — F3 and F4 are heavy, low-volatility fractions; the vapour inhalation pathway does not apply to them","Yes — the basement variant of the vapour inhalation standard is always required when a building is present"],correct:2,e:"The vapour inhalation pathway under the PHC CWS only applies to the volatile F1 and F2 fractions. F3 (C16-C34) and F4 (C34-C50) are heavier, less volatile fractions and do not present a significant vapour intrusion risk. Including vapour inhalation standards for F3/F4 would be incorrect and would not reflect the actual exposure pathway."}
+// ── TABLE EXPORT & QAQC ──
+,{q:"Which Chem Profile and Group By settings are correct in ESdat Chemistry Table for all Core6 projects?",opts:["Default profile, Group by Chem Group","Core6 2026 New Chemistry Grouping, Group by Method Type","Core6 2026 New Chemistry Grouping, Group by Chem Group","Default profile, Group by Method Type"],correct:2,e:"The correct settings are Core6 2026 New Chemistry Grouping (Chem Profile) and Group by Chem Group (Group By). Using the Default profile produces incorrect analyte groupings and subheadings that do not meet Core6 reporting standards."}
+,{q:"You want to produce the Core6 standard transposed-format chemistry table (analytes down rows, samples across columns). What Custom Layout and Export settings do you select?",opts:["Layout: any Core6 Default; Export: Vertical Export","Layout: Core6 2026 - Table - Transposed; Export: Horizontal Export","Layout: Core6 2026 - Table - Transposed; Export: Vertical Export","Layout: any Core6 Default; Export: Horizontal Export"],correct:1,e:"The transposed format requires both: 'Core6 2026 - Table - Transposed' as the Custom Layout AND Horizontal Export on the Excel Export tab. Using Vertical Export with the transposed layout produces an untransposed output. Both settings must match."}
+,{q:"After exporting a chemistry table to Excel, no RPD values are calculating despite the formula being entered correctly. The most likely cause is:",opts:["ESdat does not support RPD calculation — these must always be done manually","The duplicate samples were not linked to their parent samples in ESdat before approval","ESdat exports result cells as Text not Numbers — cells must be converted to Number before RPD formulas will calculate","The RPD column is too narrow to display the percentage result"],correct:2,e:"ESdat exports all result values as Text. The RPD formula uses ISNUMBER() — if cells are Text, it returns '-' or errors. After every export, select all result cells, look for the green Excel error marker, and click 'Convert to Number'. This must be done before RPD formulas, conditional formatting, or any calculation will work."}
+,{q:"During QAQC of a soil chemistry table you notice that hidden cells appear between some standard columns when you click into cells. What should you do before finalising the table?",opts:["Leave them — they are required for pH-dependent standard display and will not cause formatting issues","Delete the hidden cells — ESdat inserts them to show pH/hardness breakdowns, but they cause formatting problems when the table is printed or PDF'd","Convert the hidden cells to visible cells showing the actual pH breakpoints","Hide the entire standard column to remove the issue"],correct:1,e:"ESdat inserts hidden cells between standard columns to display pH or hardness breakdown values. These must be deleted before the table is finalised. If left in place, they cause formatting problems — column widths shift, page breaks fall in wrong places, and PDF output is corrupted. Deleting hidden cells is a standard step on the Core6 QAQC checklist."}
+,{q:"A table has been exported and formatted. The file naming convention after QAQC sign-off for a soil table with CSR RLLD and CL standards, completed on 15 June 2026, should be:",opts:["June 15 2026 Soil Table CSR RLLD CL Final","260615 Soil CSR RLLD, CL","Core6 Soil Table June 2026 RLLD CL","260615_Soil_CSR_RLLD_CL_QAQC"],correct:1,e:"The Core6 file naming convention after QAQC sign-off is YYMMDD followed by the media, standard framework, and applicable land uses: '260615 Soil CSR RLLD, CL'. The date used is the QAQC completion date, not the export date. Consistent file naming allows PMs and reviewers to immediately identify the table version and content from the filename."}
 ];
 
+// ── SHUFFLE UTILITY ──
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+
+// ── DRAW 13 FROM POOL, SHUFFLE QUESTIONS, SHUFFLE OPTIONS ──
+function drawTest(){
+  const pool=shuffle([...POOL]);
+  return pool.slice(0,13).map(q=>{
+    // build shuffled option index list
+    const idx=shuffle([0,1,2,3]);
+    const newOpts=idx.map(i=>q.opts[i]);
+    const newCorrect=idx.indexOf(q.correct);
+    return{q:q.q,opts:newOpts,correct:newCorrect,e:q.e};
+  });
+}
+
+let Q=[];
 let cM=0,done=new Set(),ans={},sub=false;
-const TM=M.length; // now 6 modules
+const TM=M.length;
 
 function up(){const d=Math.min(done.size,TM),p=Math.round(d/TM*100);document.getElementById('pf').style.width=p+'%';document.getElementById('pp').textContent=p+'%';document.getElementById('pl').textContent=cM<TM?'Module '+(cM+1)+' of '+TM:'Knowledge test';}
 function un(){document.querySelectorAll('.mt').forEach((t,i)=>{t.classList.remove('active','done');if(i===cM)t.classList.add('active');if(i<TM&&done.has(i))t.classList.add('done');});}
@@ -495,8 +546,9 @@ document.getElementById('mc').innerHTML=`<h2 class="mh">${m.t}</h2><div class="m
 function cm(i){done.add(i);up();un();if(i<TM-1)sm(i+1);else sm(TM);}
 
 function rt(){
+Q=drawTest();
 document.getElementById('pl').textContent='Knowledge test — 13 questions';
-let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions covering Modules 1–6 — 75% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, ESdat configuration decisions, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
+let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions drawn randomly from a pool of ${POOL.length} — 75% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, ESdat configuration decisions, DMM import rules, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
 Q.forEach((q,qi)=>{
 h+=`<div class="qb" id="qb${qi}"><div class="qt">${qi+1}. ${q.q}</div><div class="qo">`;
 q.opts.forEach((o,oi)=>{h+=`<button class="qop" id="op${qi}_${oi}" onclick="sa(${qi},${oi})"><span class="od" id="od${qi}_${oi}"></span><span>${o}</span></button>`;});
@@ -524,7 +576,8 @@ ge(qi,q,ch);
 });
 const p=Math.round(sc/Q.length*100),pass=p>=75;
 document.getElementById('tb').innerHTML=!pass?'<button class="btn btnp" onclick="rr()">Retry test →</button>':'';
-document.getElementById('sd').innerHTML=`<div class="sc"><div class="sn">${p}%</div><div class="sc2">${sc} of ${Q.length} correct</div><div><span class="rb ${pass?'rp':'rf'}">${pass?'✓ Passed — ESdat Data Management certified':'Not yet passed — review modules and retry (75% required)'}</span></div></div>`;
+const certBtn=pass?`<div style="margin-top:16px"><button class="btncert" onclick="dlCert()">⬇ Download Certificate (PDF)</button></div>`:'';
+document.getElementById('sd').innerHTML=`<div class="sc"><div class="sn">${p}%</div><div class="sc2">${sc} of ${Q.length} correct</div><div><span class="rb ${pass?'rp':'rf'}">${pass?'✓ Passed — ESdat Data Management certified':'Not yet passed — review modules and retry (75% required)'}</span></div>${certBtn}</div>`;
 }
 async function ge(qi,q,ch){
 const ok=ch===q.correct;
@@ -536,6 +589,150 @@ const fb=document.getElementById('fb'+qi);if(fb)fb.innerHTML='<div class="fbl" s
 }catch(e){const fb=document.getElementById('fb'+qi);if(fb)fb.innerHTML='<div class="fbl" style="color:'+(ok?'#2e5810':'#7a1010')+'">'+(ok?'✓ Correct':'✗ Incorrect')+'</div>'+q.e;}
 }
 function rr(){ans={};sub=false;rt();}
+
+function dlCert(){
+  const name=(document.getElementById('trainee-name')?.value||'').trim()||'Trainee';
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+
+  const W=1122,H=794; // A4 landscape px at 96dpi
+  const c=document.createElement('canvas');
+  c.width=W;c.height=H;
+  const ctx=c.getContext('2d');
+
+  // ── Background ──
+  ctx.fillStyle='#ffffff';
+  ctx.fillRect(0,0,W,H);
+
+  // ── Outer border ──
+  ctx.strokeStyle='#1F6FA9';ctx.lineWidth=14;
+  ctx.strokeRect(18,18,W-36,H-36);
+  // inner thin border
+  ctx.strokeStyle='#76BC43';ctx.lineWidth=3;
+  ctx.strokeRect(30,30,W-60,H-60);
+
+  // ── Top accent bar ──
+  const barGrad=ctx.createLinearGradient(0,0,W,0);
+  barGrad.addColorStop(0,'#163d5c');
+  barGrad.addColorStop(0.5,'#1F6FA9');
+  barGrad.addColorStop(0.62,'#76BC43');
+  barGrad.addColorStop(1,'#ccc');
+  ctx.fillStyle=barGrad;
+  ctx.fillRect(30,30,W-60,8);
+
+  // ── Bottom accent bar ──
+  ctx.fillStyle=barGrad;
+  ctx.fillRect(30,H-38,W-60,8);
+
+  // ── Core6 logo mark (two overlapping ellipses) ──
+  ctx.save();
+  ctx.translate(W/2,118);
+  // green ellipse
+  ctx.save();
+  ctx.rotate(-20*Math.PI/180);
+  ctx.beginPath();
+  ctx.ellipse(-14,6,24,34,0,0,Math.PI*2);
+  ctx.fillStyle='rgba(118,188,67,0.9)';
+  ctx.fill();
+  ctx.restore();
+  // blue ellipse
+  ctx.save();
+  ctx.rotate(15*Math.PI/180);
+  ctx.beginPath();
+  ctx.ellipse(10,0,20,31,0,0,Math.PI*2);
+  ctx.fillStyle='#1F6FA9';
+  ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  // ── Wordmark ──
+  ctx.fillStyle='#1F6FA9';
+  ctx.font='bold 28px Georgia,serif';
+  ctx.textAlign='center';
+  ctx.fillText('core6',W/2,168);
+  ctx.fillStyle='#888';
+  ctx.font='10px Arial,sans-serif';
+  ctx.letterSpacing='3px';
+  ctx.fillText('ENVIRONMENTAL',W/2,185);
+
+  // ── Certificate of Completion heading ──
+  ctx.fillStyle='#1F6FA9';
+  ctx.font='italic 17px Georgia,serif';
+  ctx.textAlign='center';
+  ctx.fillText('Certificate of Completion',W/2,240);
+
+  // ── Decorative rule ──
+  const ruleGrad=ctx.createLinearGradient(W/2-200,0,W/2+200,0);
+  ruleGrad.addColorStop(0,'rgba(31,111,169,0)');
+  ruleGrad.addColorStop(0.5,'#1F6FA9');
+  ruleGrad.addColorStop(1,'rgba(31,111,169,0)');
+  ctx.strokeStyle=ruleGrad;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(W/2-200,258);ctx.lineTo(W/2+200,258);ctx.stroke();
+
+  // ── "This certifies that" ──
+  ctx.fillStyle='#666';
+  ctx.font='13px "Nunito Sans",Arial,sans-serif';
+  ctx.fillText('This certifies that',W/2,295);
+
+  // ── Trainee name ──
+  ctx.fillStyle='#163d5c';
+  ctx.font='bold 44px Georgia,serif';
+  ctx.fillText(name,W/2,358);
+
+  // ── Underline name ──
+  const nm=ctx.measureText(name);
+  const nleft=W/2-nm.width/2-20,nright=W/2+nm.width/2+20;
+  ctx.strokeStyle='#76BC43';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(nleft,368);ctx.lineTo(nright,368);ctx.stroke();
+
+  // ── "has successfully completed" ──
+  ctx.fillStyle='#555';
+  ctx.font='14px "Nunito Sans",Arial,sans-serif';
+  ctx.fillText('has successfully completed',W/2,405);
+
+  // ── Course title ──
+  ctx.fillStyle='#1F6FA9';
+  ctx.font='bold 22px Georgia,serif';
+  ctx.fillText('ESdat Data Management Training',W/2,445);
+
+  ctx.fillStyle='#555';
+  ctx.font='13px "Nunito Sans",Arial,sans-serif';
+  ctx.fillText('Core6 Environmental — Internal Training Programme',W/2,472);
+
+  // ── Modules descriptor ──
+  ctx.fillStyle='#888';
+  ctx.font='11px "Nunito Sans",Arial,sans-serif';
+  ctx.fillText('Project Setup · Locations · Lab Import · DMM & Historical Data · BC CSR Standards · CCME Federal Guidelines · QA/QC & Table Export',W/2,500);
+
+  // ── Date ──
+  ctx.fillStyle='#555';
+  ctx.font='13px "Nunito Sans",Arial,sans-serif';
+  ctx.fillText('Completed: '+dateStr,W/2,540);
+
+  // ── Signature line (left) ──
+  const sigY=640;
+  ctx.strokeStyle='#bbb';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(W/2-300,sigY);ctx.lineTo(W/2-100,sigY);ctx.stroke();
+  ctx.fillStyle='#999';ctx.font='10px Arial,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Trainee Signature',W/2-200,sigY+16);
+
+  // ── Signature line (right) ──
+  ctx.beginPath();ctx.moveTo(W/2+100,sigY);ctx.lineTo(W/2+300,sigY);ctx.stroke();
+  ctx.fillText('Authorised by Core6 Environmental',W/2+200,sigY+16);
+
+  // ── ID / version ──
+  ctx.fillStyle='#ccc';ctx.font='9px Arial,sans-serif';ctx.textAlign='right';
+  ctx.fillText('ESdat Training v2026 · '+dateStr,W-45,H-48);
+
+  // ── Convert to PNG data URL then trigger download via hidden <a> ──
+  const url=c.toDataURL('image/png',1.0);
+  const a=document.createElement('a');
+  const safeName=name.replace(/[^a-zA-Z0-9 _-]/g,'').replace(/ +/g,'_');
+  a.download='Core6_ESdat_Certificate_'+safeName+'.png';
+  a.href=url;
+  a.click();
+}
+
 sm(0);
 </script>
 
