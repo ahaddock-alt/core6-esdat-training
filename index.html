@@ -115,7 +115,7 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
   <div class="cpills">
     <div class="cpill"><strong>Audience</strong>All staff using ESdat</div>
     <div class="cpill"><strong>Modules</strong>7 learning modules</div>
-    <div class="cpill"><strong>Assessment</strong>13-question test (75% to pass)</div>
+    <div class="cpill"><strong>Assessment</strong>13-question test (100% to pass)</div>
     <div class="cpill"><strong>Format</strong>Self-directed online</div>
   </div>
   <div class="nbox">
@@ -544,7 +544,7 @@ function cm(i){done.add(i);up();un();if(i<TM-1)sm(i+1);else sm(TM);}
 function rt(){
 Q=drawTest();
 document.getElementById('pl').textContent='Knowledge test — 13 questions';
-let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions drawn randomly from a pool of ${POOL.length} — 75% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, ESdat configuration decisions, DMM import rules, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
+let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions drawn randomly from a pool of ${POOL.length} — 100% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, ESdat configuration decisions, DMM import rules, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
 Q.forEach((q,qi)=>{
 h+=`<div class="qb" id="qb${qi}"><div class="qt">${qi+1}. ${q.q}</div><div class="qo">`;
 q.opts.forEach((o,oi)=>{h+=`<button class="qop" id="op${qi}_${oi}" onclick="sa(${qi},${oi})"><span class="od" id="od${qi}_${oi}"></span><span>${o}</span></button>`;});
@@ -570,10 +570,10 @@ const fb=document.getElementById('fb'+qi),ok=ch===q.correct;
 fb.style.display='block';fb.innerHTML='<div class="fbl" style="color:'+(ok?'#2e5810':'#7a1010')+'">'+(ok?'✓ Correct':'✗ Incorrect')+'</div>Getting explanation <span class="ad"><span></span><span></span><span></span></span>';
 ge(qi,q,ch);
 });
-const p=Math.round(sc/Q.length*100),pass=p>=75;
+const p=Math.round(sc/Q.length*100),pass=p>=100;
 document.getElementById('tb').innerHTML=!pass?'<button class="btn btnp" onclick="rr()">Retry test →</button>':'';
 const certBtn=pass?`<div style="margin-top:16px"><button class="btncert" onclick="dlCert()">⬇ Download Certificate (PDF)</button></div>`:'';
-document.getElementById('sd').innerHTML=`<div class="sc"><div class="sn">${p}%</div><div class="sc2">${sc} of ${Q.length} correct</div><div><span class="rb ${pass?'rp':'rf'}">${pass?'✓ Passed — ESdat Data Management certified':'Not yet passed — review modules and retry (75% required)'}</span></div>${certBtn}</div>`;
+document.getElementById('sd').innerHTML=`<div class="sc"><div class="sn">${p}%</div><div class="sc2">${sc} of ${Q.length} correct</div><div><span class="rb ${pass?'rp':'rf'}">${pass?'✓ Passed — ESdat Data Management certified':'Not yet passed — review modules and retry (100% required)'}</span></div>${certBtn}</div>`;
 }
 async function ge(qi,q,ch){
 const ok=ch===q.correct;
