@@ -111,10 +111,10 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
 </div>
 <div class="cover">
   <h1>ESdat — Data Management Training</h1>
-  <div class="csub">Modules 1–5 &nbsp;·&nbsp; Project Setup Through Table QA/QC &nbsp;·&nbsp; Core6 Internal</div>
+  <div class="csub">Modules 1–7 &nbsp;·&nbsp; Project Setup Through Table QA/QC &nbsp;·&nbsp; Core6 Internal</div>
   <div class="cpills">
     <div class="cpill"><strong>Audience</strong>All staff using ESdat</div>
-    <div class="cpill"><strong>Modules</strong>7 learning modules</div>
+    <div class="cpill"><strong>Modules</strong>8 learning modules</div>
     <div class="cpill"><strong>Assessment</strong>13-question test (100% to pass)</div>
     <div class="cpill"><strong>Format</strong>Self-directed online</div>
   </div>
@@ -131,7 +131,7 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
 
 <div class="cnt">
   <div class="pw-bar">
-    <div class="pw-lbl"><span id="pl">Module 1 of 6</span><span id="pp">0%</span></div>
+    <div class="pw-lbl"><span id="pl">Module 1 of 7</span><span id="pp">0%</span></div>
     <div class="pw-tr"><div class="pw-fi" id="pf" style="width: 0%;"></div></div>
   </div>
   <div class="mnav" id="mn">
@@ -140,8 +140,9 @@ hr.dv{border:none;border-top:1px solid var(--c6grm);margin:14px 0;}
     <button class="mt" onclick="sm(2)">3 — Lab import</button>
     <button class="mt" onclick="sm(3)">4A — BC CSR standards</button>
     <button class="mt" onclick="sm(4)">4B — CCME federal</button>
-    <button class="mt" onclick="sm(5)">5 — QAQC &amp; export</button>
-    <button class="mt" onclick="sm(6)">Knowledge test</button>
+    <button class="mt" onclick="sm(5)">5 — BC Water Quality</button>
+    <button class="mt" onclick="sm(6)">6 — QAQC &amp; export</button>
+    <button class="mt" onclick="sm(7)">Knowledge test</button>
   </div>
   <div id="mc"><h2 class="mh">Project setup — projects, sites, and COC preparation</h2><div class="ms">Module 1 of 5 — Before field work begins</div>
 <p class="b">ESdat organises all environmental data under a <strong>Project → Site → Location</strong> hierarchy. Getting this right before field work begins determines whether your data can be found, compared, and reported correctly. Errors at setup propagate through every table you will ever produce from that project.</p>
@@ -409,7 +410,84 @@ const M=[
 <div class="tip"><span class="bi">💡</span><span>ESdat standard names for CCME guidelines must be entered exactly as they appear in the ESdat database — small spelling or spacing differences prevent the standard from being recognised. When in doubt, copy-paste from ESdat rather than typing the standard name manually.</span></div>
 <div class="info"><span class="bi">ℹ</span><span><strong>Upcoming CCME change — soil vapour:</strong> CCME is actively developing dedicated Canadian Soil Vapour Quality Guidelines for approximately 40 chemicals of concern, including VOCs and BTEX. Once published, these will provide direct soil vapour concentration thresholds. Monitor ccme.ca for updates and advise your PM when they are published, as they may affect how vapour intrusion is assessed on active projects.</span></div>
 `},
-{t:"Table export, QAQC, and post-export formatting",s:"Module 5 of 6 — Getting from ESdat to a client-ready analytical table",h:`
+{t:"BC Water Quality Guidelines — an overview",s:"Module 5 of 7 — WQGs for aquatic life, drinking water, recreation, and agriculture",h:`
+<p class="b">British Columbia's Water Quality Guidelines (WQGs) are developed or adopted by the Ministry of Environment and Climate Change Strategy (ENV) to protect water quality for designated uses in both fresh and marine waters. They are a key reference in contaminated sites work — used to set water use standards under the BC Contaminated Sites Regulation (CSR), assess aquatic receiving environments, and provide context for groundwater data where site-specific water use designations apply.</p>
+<div class="info"><span class="bi">ℹ</span><span>WQGs do not have direct legal standing. However, once approved by ENV, they <strong>must be considered</strong> in any decision affecting water quality made within the ministry. On contaminated sites, they underpin the CSR Schedule 3.2 water quality standards.</span></div>
+
+<h3 class="h3">Water use categories</h3>
+<p class="b">BC WQGs are developed for five designated water use categories, each with its own guideline documents and series numbers:</p>
+<table class="dt">
+<tr><th>Water Use</th><th>Series</th><th>Description</th></tr>
+<tr><td><strong>Aquatic Life, Wildlife &amp; Agriculture</strong></td><td>WQG-20</td><td>Freshwater and marine aquatic life (chronic and acute), wildlife, livestock watering, and irrigation. The broadest category — includes both long-term chronic and short-term acute thresholds for most parameters.</td></tr>
+<tr><td><strong>Source Drinking Water</strong></td><td>WQG-01</td><td>Protects drinking water sources (surface water and groundwater) from cumulative impacts. Separate from Health Canada guidelines — these are ambient source protection benchmarks, not treatment standards.</td></tr>
+<tr><td><strong>Recreational Water</strong></td><td>WQG-02</td><td>Protects human health during primary contact recreation (swimming, etc.). Largely adopted from Health Canada Guidelines for Canadian Recreational Water Quality.</td></tr>
+</table>
+
+<h3 class="h3">Approved vs. working WQGs</h3>
+<p class="b">Not all BC WQGs have the same status:</p>
+<ul class="ul">
+<li><strong>Approved WQGs</strong> — have been through ENV's full scientific review and approval process. These are the authoritative provincial guidelines and must be applied in preference to other sources.</li>
+<li><strong>Working WQGs</strong> — interim guidelines used while full approval is pending, or for parameters where approved guidelines are not yet available. Check the ENV website for the current status of any specific parameter before using it in a report.</li>
+</ul>
+<div class="warn"><span class="bi">⚠</span><span>WQG documents are periodically updated. Always verify you are referencing the most current approved WQG. The May 2026 update to WQG-20 (Aquatic Life, Wildlife and Agriculture) is the current version — confirm with the ENV website for any changes affecting your project parameters.</span></div>
+
+<h3 class="h3">Chronic and acute guidelines — aquatic life</h3>
+<p class="b">For aquatic life, BC uses a two-tier approach:</p>
+<table class="dt">
+<tr><th>Tier</th><th>Description</th><th>How applied</th></tr>
+<tr><td><strong>Long-term Chronic</strong></td><td>Protects the most sensitive species and life stages against sub-lethal and lethal effects during indefinite exposure.</td><td>Averaging period approach — typically 5 samples over 30 days. Concentrations may fluctuate above the chronic threshold provided the short-term acute is never exceeded and the 30-day average is met.</td></tr>
+<tr><td><strong>Short-term Acute</strong></td><td>A hard upper limit — concentrations above this level are expected to cause acute toxic effects even with brief exposure.</td><td>Must never be exceeded at any single measurement. Takes precedence over chronic averaging.</td></tr>
+</table>
+<div class="tip"><span class="bi">💡</span><span>Minimum 5 samples are needed to calculate a 30-day chronic average. In practice, if concentrations rarely exceed the chronic threshold, less frequent monitoring may be justifiable. If concentrations fluctuate widely, more than 5 samples may be needed for a defensible average.</span></div>
+
+<h3 class="h3">Hardness and chemistry-dependent guidelines</h3>
+<p class="b">Several aquatic life WQGs for metals are not fixed values — they are calculated based on site water chemistry:</p>
+<ul class="ul">
+<li><strong>Copper (Cu)</strong> — freshwater aquatic life WQGs are calculated using the BC Biotic Ligand Model (BC BLM), requiring pH, dissolved organic carbon (DOC), and hardness as inputs. Marine and estuarine WQGs are fixed (chronic ≤2 µg/L total Cu; acute 3 µg/L total Cu).</li>
+<li><strong>Nickel (Ni)</strong> — freshwater aquatic life WQGs are also calculated via the BC BLM. The chronic and acute values vary substantially depending on pH, DOC, hardness, and temperature. Example chronic values range from ~0.8 µg/L (soft, low-DOC water) to ~44 µg/L (harder, higher-DOC water).</li>
+<li><strong>Natural background rule</strong> — where natural background concentrations of a metal already exceed the WQG, the allowed increase above natural levels must be based on site-specific data rather than the generic guideline.</li>
+</ul>
+
+<h3 class="h3">Source Drinking Water Quality Guidelines (SDWQGs)</h3>
+<p class="b">The SDWQGs (WQG-01) are ambient guidelines to protect drinking water source quality — they apply to surface water and groundwater that is or could be used as a drinking water source. They are distinct from the Health Canada <em>Guidelines for Canadian Drinking Water Quality</em> (which govern treated drinking water at the tap).</p>
+<table class="dt">
+<tr><th>Guideline type</th><th>Abbreviation</th><th>Basis</th></tr>
+<tr><td><strong>Maximum Allowable Concentration</strong></td><td>MAC</td><td>Health-based — concentrations above this level carry unacceptable health risk. Preferred over AO where both exist.</td></tr>
+<tr><td><strong>Aesthetic Objective</strong></td><td>AO</td><td>Taste, odour, or visual quality — not directly health-based but important for source water protection.</td></tr>
+</table>
+<p class="b">SDWQGs are developed by adopting guidelines from other jurisdictions in a defined hierarchy: (1) Health Canada, (2) BC ENV Approved WQGs for Drinking Water Sources, (3) US EPA Regional Screening Levels (adjusted for 20% apportionment and BC cancer risk threshold), (4) BC Ministry of Health, (5) US EPA Safe Drinking Water Act, (6) World Health Organization.</p>
+<div class="info"><span class="bi">ℹ</span><span>On contaminated sites, the CSR Schedule 3.2 drinking water standards are set by adopting SDWQGs or Health Canada Guidelines. Where a Schedule 3.2 standard has been derived from a US EPA RSL, it has been adjusted to 20% drinking water route apportionment and to the CSR human lifetime cancer risk threshold of ≤1 in 100,000.</span></div>
+
+<h3 class="h3">Recreational Water Quality Guidelines (RWQGs)</h3>
+<p class="b">The RWQGs (WQG-02) address microbiological and chemical parameters relevant to human health during primary contact recreation — activities where whole-body or face/trunk immersion occurs and water ingestion is likely. They are largely adopted from Health Canada's Guidelines for Canadian Recreational Water Quality.</p>
+<ul class="ul">
+<li>An exceedance of an RWQG does not confirm unacceptable risk — it indicates elevated potential for adverse effects and triggers further investigation.</li>
+<li>Microbiological WQGs for shellfish harvesting are managed separately under the Canadian Shellfish Sanitation Program (CSSP) and are not included in the RWQGs.</li>
+<li>RWQGs were last reviewed in 2019; no changes were made from the 2017 version.</li>
+</ul>
+
+<h3 class="h3">WQGs and CSR water use standards — the connection</h3>
+<p class="b">Under the BC CSR, water quality standards in Schedule 3.2 are set using approved WQGs as the basis. The relationship is important to understand for contaminated sites practice:</p>
+<table class="dt">
+<tr><th>CSR water use</th><th>WQG source</th><th>Notes</th></tr>
+<tr><td>Aquatic life (freshwater)</td><td>BC ENV Approved WQGs — aquatic life</td><td>CSR prefers Ministry WQGs; CCME CEQGs used where Ministry WQG is unavailable or CCME is more robust.</td></tr>
+<tr><td>Aquatic life (marine/estuarine)</td><td>BC ENV Approved WQGs — aquatic life</td><td>Applies within 500 m of an aquatic receiving environment in most cases.</td></tr>
+<tr><td>Irrigation &amp; livestock watering</td><td>BC ENV WQGs or CCME CEQGs</td><td>Ministry WQGs preferred unless CCME is considered more robust or applicable.</td></tr>
+<tr><td>Drinking water</td><td>Health Canada GDWQ → BC ENV SDWQGs → US EPA RSL (adjusted) → …</td><td>Hierarchical adoption; all standards in Schedule 3.2 have a footnoted source.</td></tr>
+</table>
+<div class="crit"><span class="bi">🔴</span><span>Aquatic life water use applies at BC sites where the site is within 500 m of an aquatic receiving environment — unless it can be demonstrated that groundwater does not flow to that environment. This determination requires a hydrogeological assessment and PM sign-off. Do not assume aquatic life standards are absent without explicitly evaluating the receptor pathway.</span></div>
+
+<h3 class="h3">Using WQGs in ESdat</h3>
+<p class="b">When configuring Chemistry Tables for surface water or groundwater with aquatic life or other water use designations, the relevant standards loaded in ESdat are derived from WQGs. Practical considerations:</p>
+<ul class="ul">
+<li>Confirm with the PM what water use designations apply at the site before selecting standards in ESdat — water use designation determines which WQG-derived standards are applicable.</li>
+<li>For parameters with chemistry-dependent WQGs (copper, nickel), ESdat may use a conservative default value. Verify with the PM whether a site-specific calculated value should be used instead.</li>
+<li>CSR Schedule 3.2 aquatic life standards in ESdat may lag behind the most current approved WQG values — the same spot-check approach used for soil standards applies here. If a result is near a threshold, verify the standard value against the current ENV WQG document.</li>
+<li>The May 2026 WQG-20 update revised several parameters. Confirm the ESdat library reflects the current values before producing aquatic life comparison tables.</li>
+</ul>
+<hr class="dv"><div class="br"><button class="btn" onclick="sm(4)">← Back</button><button class="btn btnp" onclick="cm(5)">Mark complete and continue →</button></div>
+`},
+{t:"Table export, QAQC, and post-export formatting",s:"Module 6 of 7 — Getting from ESdat to a client-ready analytical table",h:`
 <p class="b">Exporting a table from ESdat produces a working file — not a finished product. Every table must be reviewed against the Core6 QAQC Checklist by the table author, and then checked by the PM or a senior reviewer, before it enters a client deliverable. This module covers the export steps and the full QAQC workflow.</p>
 <h3 class="h3">Exporting the table</h3>
 <table class="dt">
@@ -510,6 +588,14 @@ const POOL=[
 ,{q:"After exporting a chemistry table to Excel, no RPD values are calculating despite the formula being entered correctly. The most likely cause is:",opts:["ESdat does not support RPD calculation — these must always be done manually","The duplicate samples were not linked to their parent samples in ESdat before approval","ESdat exports result cells as Text not Numbers — cells must be converted to Number before RPD formulas will calculate","The RPD column is too narrow to display the percentage result"],correct:2,e:"ESdat exports all result values as Text. The RPD formula uses ISNUMBER() — if cells are Text, it returns '-' or errors. After every export, select all result cells, look for the green Excel error marker, and click 'Convert to Number'. This must be done before RPD formulas, conditional formatting, or any calculation will work."}
 ,{q:"During QAQC of a soil chemistry table you notice that hidden cells appear between some standard columns when you click into cells. What should you do before finalising the table?",opts:["Leave them — they are required for pH-dependent standard display and will not cause formatting issues","Delete the hidden cells — ESdat inserts them to show pH/hardness breakdowns, but they cause formatting problems when the table is printed or PDF'd","Convert the hidden cells to visible cells showing the actual pH breakpoints","Hide the entire standard column to remove the issue"],correct:1,e:"ESdat inserts hidden cells between standard columns to display pH or hardness breakdown values. These must be deleted before the table is finalised. If left in place, they cause formatting problems — column widths shift, page breaks fall in wrong places, and PDF output is corrupted. Deleting hidden cells is a standard step on the Core6 QAQC checklist."}
 ,{q:"A table has been exported and formatted. The file naming convention after QAQC sign-off for a soil table with CSR RLLD and CL standards, completed on 15 June 2026, should be:",opts:["June 15 2026 Soil Table CSR RLLD CL Final","260615 Soil CSR RLLD, CL","Core6 Soil Table June 2026 RLLD CL","260615_Soil_CSR_RLLD_CL_QAQC"],correct:1,e:"The Core6 file naming convention after QAQC sign-off is YYMMDD followed by the media, standard framework, and applicable land uses: '260615 Soil CSR RLLD, CL'. The date used is the QAQC completion date, not the export date. Consistent file naming allows PMs and reviewers to immediately identify the table version and content from the filename."}
+// ── BC WATER QUALITY GUIDELINES ──
+,{q:"BC Water Quality Guidelines (WQGs) have direct legal standing under the Environmental Management Act and are independently enforceable at contaminated sites.",opts:["True — WQGs are legally binding provincial standards","False — WQGs do not have direct legal standing, but once approved they must be considered in any decision affecting water quality made within ENV","True — but only Approved WQGs are enforceable; Working WQGs have no formal status","False — WQGs are only advisory documents and ENV has no formal obligation to consider them"],correct:1,e:"BC WQGs do not have direct legal standing and are not independently enforceable. However, once approved by ENV's Executive Director, they constitute ENV policy and must be considered in any water quality decision made within ENV. On contaminated sites, WQG values are adopted as the basis for legally binding CSR Schedule 3.2 water quality standards."}
+,{q:"For freshwater aquatic life, the BC WQG framework uses two tiers. The long-term chronic guideline is met using an averaging period approach. What is the minimum number of samples required to calculate the 30-day average?",opts:["1 sample — any single measurement can be compared to the chronic guideline","3 samples over 30 days","5 samples over 30 days","10 samples over 30 days — fewer samples are considered statistically invalid"],correct:2,e:"BC WQGs specify 5 samples as the minimum needed to calculate a valid 30-day chronic average. The averaging period approach allows concentrations to fluctuate above the chronic threshold provided the short-term acute guideline is never exceeded and the 30-day average is met. If concentrations fluctuate widely, more than 5 samples may be needed for a defensible average."}
+,{q:"The freshwater aquatic life WQG for copper is not a fixed value. What site water chemistry parameters are needed to calculate it using the BC Biotic Ligand Model?",opts:["Temperature, dissolved oxygen, and electrical conductivity","pH, dissolved organic carbon (DOC), and hardness","pH and hardness only — DOC is not used in the BC BLM for copper","Total dissolved solids and alkalinity"],correct:1,e:"The BC Biotic Ligand Model (BC BLM) for copper requires pH, dissolved organic carbon (DOC), and hardness as inputs to calculate site-specific freshwater aquatic life WQGs. Marine and estuarine WQGs for copper are fixed (chronic ≤2 µg/L total Cu; acute 3 µg/L total Cu) and do not require water chemistry inputs."}
+,{q:"At a contaminated site adjacent to a river, the PM asks whether aquatic life water use standards apply to the groundwater monitoring wells. What is the key site-specific factor that determines this?",opts:["Whether the site has a Schedule 2 Approved Professional conducting oversight","Whether the site is within 500 m of the aquatic receiving environment — aquatic life standards apply unless it can be demonstrated that groundwater does not flow to that environment","Whether the river is provincially designated as a sensitive aquatic habitat","Whether the site has any exceedances of Schedule 3.2 drinking water standards"],correct:1,e:"Aquatic life water use applies to groundwater at sites within 500 m of an aquatic receiving environment, unless a hydrogeological assessment demonstrates that site groundwater does not flow to that environment. This receptor pathway determination requires PM sign-off and should not be assumed without explicit evaluation. The 500 m distance is the trigger for the assessment, not a blanket exemption."}
+,{q:"What is the distinction between BC Source Drinking Water Quality Guidelines (SDWQGs) and Health Canada's Guidelines for Canadian Drinking Water Quality?",opts:["They are the same guidelines — BC ENV directly adopts all Health Canada values without modification","SDWQGs are ambient water quality benchmarks to protect drinking water sources (surface water and groundwater before treatment). Health Canada guidelines govern treated drinking water quality at the tap — they are different standards addressing different points in the treatment chain.","SDWQGs are more stringent than Health Canada guidelines in all cases","SDWQGs only apply to groundwater; Health Canada guidelines apply to surface water sources"],correct:1,e:"SDWQGs (WQG-01) are ambient guidelines protecting source water quality — they apply to surface water and groundwater as it exists in the natural environment, before treatment. Health Canada's Guidelines for Canadian Drinking Water Quality govern the quality of treated drinking water delivered to consumers. They are different standards addressing different stages. On contaminated sites, the CSR Schedule 3.2 drinking water standards are based on the source water hierarchy, with Health Canada GDWQ as the first preference."}
+,{q:"A groundwater chemistry table for a site near a freshwater body shows a copper result near the aquatic life standard. The ESdat library shows a fixed value was used. What should you consider?",opts:["Fixed copper values are always correct — the BC BLM is only required for soil assessments","Check with the PM whether a site-specific BC BLM calculation using measured pH, DOC, and hardness is more appropriate. Site-specific calculated values may be significantly different from a conservative fixed default.","Report the exceedance as-is — ESdat is authoritative for all standard values","The fixed value is more conservative and therefore always the correct approach for contaminated sites"],correct:1,e:"Freshwater aquatic life WQGs for copper are calculated using the BC BLM with site-specific pH, DOC, and hardness. ESdat may default to a conservative fixed value, but a site-specific calculated WQG could be substantially higher or lower depending on water chemistry. Confirm with the PM whether a site-specific calculation is warranted before reporting an exceedance or a passing result near the threshold."}
+,{q:"Which of the following correctly describes the hierarchy used when setting BC CSR Schedule 3.2 drinking water standards?",opts:["CCME CEQGs are the first preference, followed by BC ENV Approved WQGs, then Health Canada","Health Canada GDWQ is the first preference, followed by BC ENV Approved SDWQGs, then US EPA Regional Screening Levels (adjusted for 20% apportionment and BC cancer risk threshold)","US EPA standards are always used because they are more conservative than Canadian guidelines","BC ENV Approved WQGs for drinking water are always used — other jurisdictions are only referenced for aesthetic parameters"],correct:1,e:"The CSR drinking water standard hierarchy is: (1) Health Canada GDWQ, (2) BC ENV Approved WQGs for Drinking Water Sources, (3) US EPA 2015 RSL for tapwater adjusted for 20% apportionment and the CSR cancer risk threshold of ≤1 in 100,000, (4) BC Ministry of Health, (5) US EPA Safe Drinking Water Act, (6) World Health Organization. Each Schedule 3.2 drinking water standard has a footnoted source identifying which tier it came from."}
 ];
 
 // ── SHUFFLE UTILITY ──
@@ -544,7 +630,7 @@ function cm(i){done.add(i);up();un();if(i<TM-1)sm(i+1);else sm(TM);}
 function rt(){
 Q=drawTest();
 document.getElementById('pl').textContent='Knowledge test — 13 questions';
-let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions drawn randomly from a pool of ${POOL.length} — 100% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, ESdat configuration decisions, DMM import rules, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
+let h=`<h2 class="mh">Knowledge test</h2><div class="ms">13 questions drawn randomly from a pool of ${POOL.length} — 100% required to pass</div><p class="b">Questions test BC CSR and CCME standards knowledge, BC Water Quality Guidelines, ESdat configuration decisions, DMM import rules, and QAQC judgment. Answer all questions, then click Submit.</p><hr class="dv">`;
 Q.forEach((q,qi)=>{
 h+=`<div class="qb" id="qb${qi}"><div class="qt">${qi+1}. ${q.q}</div><div class="qo">`;
 q.opts.forEach((o,oi)=>{h+=`<button class="qop" id="op${qi}_${oi}" onclick="sa(${qi},${oi})"><span class="od" id="od${qi}_${oi}"></span><span>${o}</span></button>`;});
@@ -698,7 +784,7 @@ function dlCert(){
   // ── Modules descriptor ──
   ctx.fillStyle='#888';
   ctx.font='11px "Nunito Sans",Arial,sans-serif';
-  ctx.fillText('Project Setup · Locations · Lab Import · DMM & Historical Data · BC CSR Standards · CCME Federal Guidelines · QA/QC & Table Export',W/2,500);
+  ctx.fillText('Project Setup · Locations · Lab Import · DMM & Historical Data · BC CSR Standards · CCME Federal Guidelines · BC Water Quality · QA/QC & Table Export',W/2,500);
 
   // ── Date ──
   ctx.fillStyle='#555';
